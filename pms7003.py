@@ -26,7 +26,7 @@ VALUES_MEANING = {
     11 : 'n10',
     }
 
-NO_VALUES = len(VALUES_MEANING)
+NO_VALUES = len(VALUES_MEANING) + 1
 
 
 class Pms7003Sensor:
