@@ -6,7 +6,7 @@ if __name__ == '__main__':
 
     while True:
         try:
-            print(sensor.read()['PM10'])
+            print(sensor.read())
         except PmsSensorExcpetion:
             print('Connection problem')
 

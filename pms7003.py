@@ -13,12 +13,12 @@ START_SEQ = bytes([0x42, 0x4d])
 FRAME_BYTES = 30
 
 VALUES_MEANING = {
-    1 :'PM1.0CF1',
-    2 : 'PM2.5CF1',
-    3 : 'PM10CF1',
-    4 : 'PM1.0',
-    5 : 'PM2.5',
-    6 : 'PM10',
+    1 :'pm1.0cf1',
+    2 : 'pm2.5cf1',
+    3 : 'pm10cf1',
+    4 : 'pm1.0',
+    5 : 'pm2.5',
+    6 : 'pm10',
     7 : 'n0.3',
     8 : 'n0.5',
     9 : 'n1.0',
@@ -60,7 +60,7 @@ class Pms7003Sensor:
         _checksum = vls[-1]
         return _checksum == sum(frame[:-2]) + sum(START_SEQ)
 
-    def read(self):
+    def read(self, ordered=False):
         """
         :return: a dict with measurements or raises Pms7003Exception in case of a problem with connection
         """
@@ -69,8 +69,10 @@ class Pms7003Sensor:
         #frame_len = values[0] (you could read the frame length from here)
 
         if self._valid_frame(frame, values):
-            #return {VALUES_MEANING[i]: values[i] for i in range(1, NO_VALUES)} (regular dict)
-            return OrderedDict((VALUES_MEANING[i], values[i]) for i in range(1, NO_VALUES))
+            if ordered:
+                return OrderedDict((VALUES_MEANING[i], values[i]) for i in range(1, NO_VALUES))
+            else:
+                return {VALUES_MEANING[i]: values[i] for i in range(1, NO_VALUES)} #(regular dict)
         else:
             raise PmsSensorExcpetion
         
