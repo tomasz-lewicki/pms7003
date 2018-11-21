@@ -12,22 +12,24 @@ class PmsSensorExcpetion(Exception):
 START_SEQ = bytes([0x42, 0x4d])
 FRAME_BYTES = 30
 
-VALUES_MEANING = {
-    1 :'pm1.0cf1',
-    2 : 'pm2.5cf1',
+#'.' are replaced with '_' for easier database compability
+BYTES_MEANING = {
+    1 :'pm1_0cf1',
+    2 : 'pm2_5cf1',
     3 : 'pm10cf1',
-    4 : 'pm1.0',
-    5 : 'pm2.5',
+    4 : 'pm1_0',
+    5 : 'pm2_5',
     6 : 'pm10',
-    7 : 'n0.3',
-    8 : 'n0.5',
-    9 : 'n1.0',
-    10 : 'n5.0',
+    7 : 'n0_3',
+    8 : 'n0_5',
+    9 : 'n1_0',
+    10 : 'n5_0',
     11 : 'n10',
     }
 
-NO_VALUES = len(VALUES_MEANING) + 1
+VALUES = list(BYTES_MEANING.values())
 
+NO_VALUES = len(BYTES_MEANING) + 1
 
 class Pms7003Sensor:
 
@@ -70,9 +72,9 @@ class Pms7003Sensor:
 
         if self._valid_frame(frame, values):
             if ordered:
-                return OrderedDict((VALUES_MEANING[i], values[i]) for i in range(1, NO_VALUES))
+                return OrderedDict((BYTES_MEANING[i], values[i]) for i in range(1, NO_VALUES))
             else:
-                return {VALUES_MEANING[i]: values[i] for i in range(1, NO_VALUES)} #(regular dict)
+                return {BYTES_MEANING[i]: values[i] for i in range(1, NO_VALUES)} #(regular dict)
         else:
             raise PmsSensorExcpetion
         
