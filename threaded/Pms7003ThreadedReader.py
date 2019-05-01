@@ -20,6 +20,14 @@ class Pms7003ThreadedReader(threading.Thread):
 
         self._value_buffers = {'n1_0': _buffer(), 'pm2_5': _buffer(), 'n5_0': _buffer(), 'pm1_0cf1': _buffer(), 'pm1_0': _buffer(), 'n10': _buffer(), 'n0_3': _buffer(), 'pm10': _buffer(), 'n0_5': _buffer(), 'pm2_5cf1': _buffer(), 'pm10cf1': _buffer()}
 
+
+    def __enter__(self):
+        self.start()
+        return self
+
+    def __exit__(self, type, value, traceback):
+        self._sensor.close()
+
     def run(self):
         while True:
             time.sleep(1)
@@ -35,9 +43,6 @@ class Pms7003ThreadedReader(threading.Thread):
             except PmsSensorExcpetion as e:
                 if self._logger:
                     self._logger.error('{} {}'.format(round(time.time()), e))
-
-            print(values)
-            time.sleep(0.1)
 
     def filtered_values(self):
         self._value_buffers_lock.acquire()
