@@ -16,9 +16,13 @@ if __name__ == '__main__':
             print(sensor.read())
         except PmsSensorExcpetion:
             print('Connection problem')
+
+    sensor.close()
 ```
 
 The read function has an option of returning values as a dict or OrderedDict
 ```python
 sensor.read(ordered=True)
 ```
+# Threading
+Threading support is currently __very unstable__ 

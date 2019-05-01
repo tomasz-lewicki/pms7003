@@ -77,4 +77,7 @@ class Pms7003Sensor:
                 return {BYTES_MEANING[i]: values[i] for i in range(1, NO_VALUES)} #(regular dict)
         else:
             raise PmsSensorExcpetion
+
+    def close(self):
+        self._serial.close()
         

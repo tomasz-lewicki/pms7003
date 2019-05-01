@@ -10,3 +10,4 @@ if __name__ == '__main__':
         except PmsSensorExcpetion:
             print('Connection problem')
 
+    sensor.close()
