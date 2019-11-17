@@ -23,8 +23,9 @@ BYTES_MEANING = {
     7 : 'n0_3',
     8 : 'n0_5',
     9 : 'n1_0',
-    10 : 'n5_0',
-    11 : 'n10',
+    10: 'n2_5',
+    11 : 'n5_0',
+    12 : 'n10',
     }
 
 VALUES = list(BYTES_MEANING.values())
