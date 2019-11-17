@@ -2,10 +2,10 @@
 import serial
 from collections import OrderedDict
 
-class PmsSensorExcpetion(Exception):
+class PmsSensorException(Exception):
     """
-    Implies a problem with sensor communication that is unlikely to re-occur (e.g. serial connection glitch)
-    Prevents from returning corrupt measurements
+    Implies a problem with sensor communication that is unlikely to re-occur (e.g. serial connection glitch).
+    Prevents from returning corrupt measurements.
     """
     pass
 
@@ -48,7 +48,7 @@ class Pms7003Sensor:
             if len(frame) == FRAME_BYTES:
                 return frame
             else:
-                raise PmsSensorExcpetion
+                raise PmsSensorException
 
     def _parse_frame(self, f):
         """
@@ -76,7 +76,7 @@ class Pms7003Sensor:
             else:
                 return {BYTES_MEANING[i]: values[i] for i in range(1, NO_VALUES)} #(regular dict)
         else:
-            raise PmsSensorExcpetion
+            raise PmsSensorException
 
     def close(self):
         self._serial.close()

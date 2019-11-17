@@ -1,4 +1,4 @@
-from pms7003 import Pms7003Sensor, PmsSensorExcpetion
+from pms7003 import Pms7003Sensor, PmsSensorException
 
 if __name__ == '__main__':
 
@@ -7,7 +7,7 @@ if __name__ == '__main__':
     while True:
         try:
             print(sensor.read())
-        except PmsSensorExcpetion:
+        except PmsSensorException:
             print('Connection problem')
 
     sensor.close()

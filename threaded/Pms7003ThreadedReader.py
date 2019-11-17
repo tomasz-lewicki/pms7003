@@ -2,7 +2,7 @@ import time
 import threading 
 from collections import deque
 from statistics import mean
-from pms7003.pms7003 import Pms7003Sensor, PmsSensorExcpetion
+from pms7003.pms7003 import Pms7003Sensor, PmsSensorException
 
 class EmptyRaderBufferException(ValueError):
     pass
@@ -40,7 +40,7 @@ class Pms7003ThreadedReader(threading.Thread):
                     self._value_buffers[k].append(v)
                 self._value_buffers_lock.release() 
 
-            except PmsSensorExcpetion as e:
+            except PmsSensorException as e:
                 if self._logger:
                     self._logger.error('{} {}'.format(round(time.time()), e))
 
