@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pms7003",
-    version="0.0.0",
+    version="1.0.0",
     author="Tomasz Lewicki",
     author_email="t.w.lewicki@gmail.com",
     description="A python driver for plantower pms7003 pm sensor",
