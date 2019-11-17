@@ -4,6 +4,13 @@ The code reads PM values from serial port. Tested on Raspberry Pi, but it should
 
 Device description: <https://aqicn.org/sensor/pms5003-7003/>
 
+## Setup
+
+To install the driver, simply do:
+```bash
+pip3 install pms7003
+```
+
 ## Usage example
 
 ```python
