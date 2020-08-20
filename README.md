@@ -35,6 +35,20 @@ The read function has an option of returning values as a dict or OrderedDict.
 sensor.read(ordered=True)
 ```
 
-## Usage example (threading)
+## Usage example with threading:
 
-Please refer to [example_threading.py](example_threading.py)
+```python
+import time
+from pms7003 import Pms7003Thread
+
+if __name__ == "__main__":
+
+    with Pms7003Thread("/dev/serial0") as sensor:
+
+        while True:
+            print(sensor.measurements)
+            # We're free to do computation in main thread 
+            a = 2**32
+            time.sleep(1)
+```
+
