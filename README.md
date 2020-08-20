@@ -35,6 +35,6 @@ The read function has an option of returning values as a dict or OrderedDict.
 sensor.read(ordered=True)
 ```
 
-## Threading
+## Usage example (threading)
 
-Threading support is currently __very unstable__.
+Please refer to [example_threading.py](example_threading.py)
