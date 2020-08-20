@@ -1,5 +1,4 @@
 import time
-from threading import Thread, Lock
 from pms7003 import Pms7003Thread
 
 
