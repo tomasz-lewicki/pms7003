@@ -63,6 +63,16 @@ class Pms7003Sensor:
         _checksum = vls[-1]
         return _checksum == sum(frame[:-2]) + sum(START_SEQ)
 
+    def wakeup(self):
+        with self._serial as s:
+            command = bytearray([0x42, 0x4D, 0xE4, 0x00, 0x01, 0x01, 0x74])
+            s.write(command)
+
+    def sleep(self):
+        with self._serial as s:
+            command = bytearray([0x42, 0x4D, 0xE4, 0x00, 0x00, 0x01, 0x73])
+            s.write(command)
+
     def read(self, ordered=False):
         """
         :return: a dict with measurements or raises Pms7003Exception in case of a problem with connection
